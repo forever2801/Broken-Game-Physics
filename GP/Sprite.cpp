@@ -28,29 +28,31 @@ int main(){
 	sf::RenderWindow window(sf::VideoMode(1024, 786), "Test 32");
 	window.setFramerateLimit(60);
 	sf::Texture texture;
-	texture.loadFromFile("Asset/texture/gameplayBackground.jpg");
+	texture.loadFromFile("Asset/texture/tiles1.png");
 	sf::Sprite background{texture};
 	background.setPosition(0,0);
 	sf::SoundBuffer mySoundBuffer = loadSoundBuffer("Asset/Sound/main-bgm.wav");
 	sf::Sound mySound = createSound(mySoundBuffer);
+	
+	bool started = true;
 
 	while (window.isOpen())
     {
         sf::Event e;
         while (window.pollEvent(e))
         {
-            if (e.type == sf::Event::Closed)
-                window.close();
+			if(!started){
+				if (e.type == sf::Event::Closed){window.close();}
+			}
+			else{
+				window.draw(background);
+				mySound.play();
+				started = false;
+				if (e.type == sf::Event::Closed){window.close();}
+			}
+			
         }
     }
-	bool started = true;
-	window.clear();
-	if(!started){
-	}
-	else{
-		window.draw(background);
-		mySound.play();
-	}
 
 	window.display();
 	
