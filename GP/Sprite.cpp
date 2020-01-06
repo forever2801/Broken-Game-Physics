@@ -45,7 +45,7 @@ int main(){
 				if (e.type == sf::Event::Closed){window.close();}
 			}
 			else{
-				window.draw(background);
+				window.draw(background);//move to window.isopeninside
 				mySound.play();
 				started = false;
 				if (e.type == sf::Event::Closed){window.close();}
